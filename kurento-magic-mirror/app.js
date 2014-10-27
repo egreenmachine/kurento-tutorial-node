@@ -169,13 +169,13 @@ function start(sessionId, sdpOffer, callback) {
 			}
 
 			createMediaElements(pipeline, function(error, webRtcEndpoint,
-					faceOverlayFilter) {
+					player) {
 				if (error) {
 					pipeline.release();
 					return callback(error);
 				}
 
-				connectMediaElements(webRtcEndpoint, faceOverlayFilter,
+				connectMediaElements(webRtcEndpoint, player,
 						function(error) {
 							if (error) {
 								pipeline.release();
@@ -188,7 +188,7 @@ function start(sessionId, sdpOffer, callback) {
 									pipeline.release();
 									return callback(error);
 								}
-
+                player.play();
 								pipelines[sessionId] = pipeline;
 								return callback(null, sdpAnswer);
 							});
@@ -204,8 +204,17 @@ function createMediaElements(pipeline, callback) {
 		if (error) {
 			return callback(error);
 		}
+		
+		pipeline.create('PlayerEndpoint', {uri:"http://files.kurento.org/video/60sec/ball.webm"}, function(error,player) {
+  		if (error) {
+    		return callback(error);
+  		}
+  		
+  		return callback(null, webRtcEndpoint,player);
+		});
 
-		pipeline.create('FaceOverlayFilter',
+		/*
+pipeline.create('FaceOverlayFilter',
 				function(error, faceOverlayFilter) {
 					if (error) {
 						return callback(error);
@@ -223,16 +232,18 @@ function createMediaElements(pipeline, callback) {
 
 							});
 				});
+*/
+    
 	});
 }
 
-function connectMediaElements(webRtcEndpoint, faceOverlayFilter, callback) {
-	webRtcEndpoint.connect(faceOverlayFilter, function(error) {
+function connectMediaElements(webRtcEndpoint, player, callback) {
+	webRtcEndpoint.connect(player, function(error) {
 		if (error) {
 			return callback(error);
 		}
 
-		faceOverlayFilter.connect(webRtcEndpoint, function(error) {
+		player.connect(webRtcEndpoint, function(error) {
 			if (error) {
 				return callback(error);
 			}
