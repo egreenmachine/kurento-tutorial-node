@@ -101,14 +101,16 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
      * accessed later.
      */
      var self = this;
+     var deferred = SIP.Promise.defer();
      start('aaaaaaaaa', sdp, function(error, sdpAnswer) {
 				if (error) {
 					console.log("ERROR");
 					return SIP.Utils.Promise.reject();
 				}
 				self.selfSdp = sdpAnswer;
+				return deferred.resolve();
 			});
-      return SIP.Utils.Promise.resolve();
+      return deferred.promise;
   }},
   
   mute: {writable: true, value: function mute (options) {
