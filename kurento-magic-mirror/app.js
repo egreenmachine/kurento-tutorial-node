@@ -133,6 +133,7 @@ var ua = new SIP.UA({
 
 ua.on('invite', function(session) {
   console.log('invite received');
+  session.accept();
 });
 
 /*
