@@ -81,7 +81,7 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
     return true;
   }},
   
-  close {writable: true, value: function close () {
+  close: {writable: true, value: function close () {
     // TODO: THIS
   }},
   
