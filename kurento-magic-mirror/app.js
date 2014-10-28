@@ -18,7 +18,16 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var wsm = require('ws');
-var session = require('express-session')
+var session = require('express-session');
+var environment = require('sip.js/src/environment');
+environment.WebSocket = wsm;
+environment.Promise = require('q');
+var SIP = require('sip.js/src/SIP')(environment);
+
+var ua = new SIP.UA({
+        uri: 'node@devgreen1.onsip.com',
+        traceSip: true
+    });
 
 /*
  * Management of sessions
