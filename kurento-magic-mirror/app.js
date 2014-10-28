@@ -36,6 +36,7 @@ var KurentoMediaHandler = function(session, options) {
   this.videoMuted = false;
   
   this.selfSdp = null;
+  this.identifier = null;
 
   // old init() from here on
   var idx, length, server,
@@ -83,6 +84,8 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
   
   close: {writable: true, value: function close () {
     // TODO: THIS
+    console.log("Stopping Identifier: "+this.identifier);
+    stop(this.identifier);
   }},
   
   getDescription: {writable: true, value: function getDescription (onSuccess, onFailure, mediaHint) {
@@ -102,9 +105,12 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
      */
      var self = this;
      var deferred = SIP.Utils.Promise.defer();
-     start('aaaaaaaaa', sdp, function(error, sdpAnswer) {
+     var rand = Math.floor(Math.random() * 1001);
+     this.identifier = 'aa'+rand;
+     console.log("Starting Identifier: "+this.identifier);
+     start(this.identifier, sdp, function(error, sdpAnswer) {
 				if (error) {
-					console.log("ERROR");
+					console.log(error);
 					return SIP.Utils.Promise.reject();
 				}
 				self.selfSdp = sdpAnswer;
