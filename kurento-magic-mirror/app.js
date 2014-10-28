@@ -84,7 +84,6 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
   
   close: {writable: true, value: function close () {
     // TODO: THIS
-    console.log("Stopping Identifier: "+this.identifier);
     stop(this.identifier);
   }},
   
@@ -107,7 +106,6 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
      var deferred = SIP.Utils.Promise.defer();
      var rand = Math.floor(Math.random() * 1001);
      this.identifier = 'aa'+rand;
-     console.log("Starting Identifier: "+this.identifier);
      start(this.identifier, sdp, function(error, sdpAnswer) {
 				if (error) {
 					console.log(error);
