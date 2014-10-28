@@ -101,7 +101,7 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
      * accessed later.
      */
      var self = this;
-     var deferred = SIP.Promise.defer();
+     var deferred = SIP.Utils.Promise.defer();
      start('aaaaaaaaa', sdp, function(error, sdpAnswer) {
 				if (error) {
 					console.log("ERROR");
