@@ -121,10 +121,14 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
   
 });
 
+var kurentoMediaHandlerFactory = function (session, options) {
+  return new KurentoMediaHandler(session, options);
+};
+
 var ua = new SIP.UA({
         uri: 'node@devgreen1.onsip.com',
         traceSip: true,
-        mediaHandlerFactory: KurentoMediaHandler 
+        mediaHandlerFactory: kurentoMediaHandlerFactory 
     });
 
 ua.on('invite', function(session) {
