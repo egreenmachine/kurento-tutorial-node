@@ -9,6 +9,7 @@
     "express": "~3.2.6",
     "ws": "~0.4.32",
     "kurento-client": "^5.0.0",
-    "express-session": "~1.7.6"
+    "express-session": "~1.7.6",
+    "sip.js": "git://github.com/onsip/SIP.js.git#28523b6d81e8785330e578b9456fb9ec565e1b4e"
   }
 }
