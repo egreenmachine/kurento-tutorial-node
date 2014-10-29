@@ -19,7 +19,7 @@ var app = express();
 var path = require('path');
 var wsm = require('ws');
 var session = require('express-session');
-var SIP = require('sip.js/src/SIP');
+var SIP = require('sip.js');
 
 var KurentoMediaHandler = function(session, options) {
   var events = [
@@ -100,7 +100,7 @@ KurentoMediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
      * accessed later.
      */
      var self = this;
-     var deferred = SIP.Utils.Promise.defer();
+     var deferred = SIP.Utils.defer();
      var rand = Math.floor(Math.random() * 1001);
      this.identifier = 'aa'+rand;
      start(this.identifier, sdp, function(error, sdpAnswer) {
