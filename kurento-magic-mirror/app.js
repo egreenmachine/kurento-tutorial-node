@@ -140,22 +140,6 @@ ua.on('invite', function(session) {
 });
 
 /*
- * Management of sessions
- */
-app.use(express.cookieParser());
-
-var sessionHandler = session({
-	secret : 'none',
-	rolling : true,
-	resave : true,
-	saveUninitialized : true
-});
-
-app.use(sessionHandler);
-
-app.set('port', process.env.PORT || 8080);
-
-/*
  * Defintion of constants
  */
 
