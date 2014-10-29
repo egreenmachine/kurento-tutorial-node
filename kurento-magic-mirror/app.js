@@ -144,7 +144,7 @@ ua.on('invite', function(session) {
  */
 
 const
-ws_uri = "ws://localhost:8888/kurento";
+ws_uri = "ws://192.168.1.36:8888/kurento";
 
 /*
  * Definition of global variables.
